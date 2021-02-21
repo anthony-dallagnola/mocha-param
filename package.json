@@ -5,7 +5,9 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "mocha ./test/*.js"
+    "build": "tsc",
+    "test": "mocha -r ts-node/register ./test/*.ts",
+    "lint": "eslint lib/**/*.ts*"
   },
   "keywords": [
     "parameterized",
@@ -20,7 +22,17 @@
     "url": "git://github.com/mikejsdev/mocha-param.git"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.1",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "chai": "^3.5.0",
+    "eslint-config-google": "^0.14.0",
     "mocha": "^3.2.0",
-    "chai": "^3.5.0"
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "eslint": "^7.20.0"
   }
 }

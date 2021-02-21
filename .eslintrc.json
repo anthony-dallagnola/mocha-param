@@ -1,0 +1,82 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "google"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    // // note you must disable the base rule as it can report incorrect errors
+    // "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "no-unused-vars": [
+      "error", 
+      {
+        "ignoreRestSiblings": true
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 180
+      }
+    ],
+    "valid-jsdoc": [
+      "error",
+      {
+        "prefer": {
+          "return": "returns"
+          // "requireReturn": true,
+          // "requireParamDescription": true,
+          // "requireReturnDescription": true,
+          // "requireReturnType": true,
+          // "requireParamType": true
+        }
+      }
+    ],
+    // "require-jsdoc": [
+    //   "error",
+    //   {
+    //     "MethodDefinition": true
+    //   }
+    // ],
+    "object-curly-spacing": "off",
+    // Indent JS at 2
+    // Indent JS/TS at 2 and switch case at 2
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    // Indent TS at 2
+    // "@typescript-eslint/indent": [
+    //   "error",
+    //   2
+    // ],
+    "@typescript-eslint/no-inferrable-types": [
+      "error"
+    ]
+  }
+}
