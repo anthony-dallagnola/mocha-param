@@ -1,64 +1,69 @@
-/*
- * Wrap calls to mocha "it" function in a forEach loop
- */
+import { FunctionCallback } from './model/FunctionCallbackType';
+import { MochaCallback } from './model/MochaCallbackType';
+import { ParamTestFunction } from './model/ParamTestFunction';
 
-import { Done } from 'mocha';
-
-// /*
-//  * The library is wrapped in a function (IIFE) that allows
-//  * mocha param to be required simply by using require('mocha-param')
-//  * but ensures backwards compatibility with those still using require('mocha-param').itParam
-//  */
-// export function(desc: string, data: T[], callback: (value: T) => void) {
-//     const wrapper = function (desc: string, data: T[], callback: (value: T) => void) {
-//         run(desc, data, callback);
-//     };
-
-//     wrapper.itParam = run;
-//     return wrapper;
-// } ();
-// export const itParam = function(desc: string, data: T[], callback: (value: T) => void) {
-//   const wrapper = function(desc: string, data: T[], callback: (value: T) => void) {
-//     run(desc, data, callback);
-//   };
-
-//   wrapper.itParam = run;
-//   return wrapper;
-// }();
-
-/*
- * Call mocha "it" function either sync or async depending
- * on whether callback has one or two params
- */
-function run<T>(desc: string, data: T[], callback: ((value: T) => void) | ((done: Done, value: T) => void)): void {
+const itEach: ParamTestFunction = <T>(title: string, data: T[], callback: FunctionCallback<T>, callbackMocha?: MochaCallback): void => {
   if (callback.length === 2) {
-    callItAsync(desc, data, callback);
+    callItAsync(title, data, callback, callbackMocha || it);
   } else {
-    callItSync(desc, data, callback);
+    callItSync(title, data, callback, callbackMocha || it);
   }
 };
 
-function callItSync(desc, data, callback) {
-  data.forEach(function(val) {
-    it(renderTemplate(desc, val), function() {
+itEach.only = <T>(title: string, data: T[], callback: FunctionCallback<T>): void => {
+  itEach(title, data, callback, it.only);
+};
+
+itEach.skip = <T>(title: string, data: T[], callback: FunctionCallback<T>): void => {
+  itEach(title, data, callback, it.skip);
+};
+
+/**
+ * Call mocha it function synchronously
+ *
+ * @template T type of parameters
+ * @param {string} title title of the test
+ * @param {T[]} data parameters
+ * @param {FunctionCallback} callback function to test
+ * @param {MochaCallback} callbackMocha mocha function to call
+ * @returns {Void} void
+ */
+function callItSync<T>(title: string, data: T[], callback: FunctionCallback<T>, callbackMocha: MochaCallback): void {
+  data.forEach(function(val: T) {
+    callbackMocha(renderTemplate(title, val), function() {
       return callback(val);
     });
   });
 }
 
-function callItAsync(desc, data, callback) {
+/**
+ * Call mocha it function asynchronously
+ *
+ * @template T type of parameters
+ * @param {string} title title of the test
+ * @param {T[]} data parameters
+ * @param {FunctionCallback} callback function to test
+ * @param {MochaCallback} callbackMocha mocha function to call
+ * @returns {Void} void
+ */
+function callItAsync<T>(title: string, data: T[], callback: FunctionCallback<T>, callbackMocha: MochaCallback): void {
   data.forEach(function(val) {
-    it(renderTemplate(desc, val), function(done) {
+    callbackMocha(renderTemplate(title, val), function(done) {
       callback(done, val);
     });
   });
 }
 
-/*
+/**
  * Add value to description
+ *
+ * @param {string} template title template
+ * @param {any} value value from parameter
+ * @returns {string} title
  */
-function renderTemplate(template, value) {
+function renderTemplate(template: string, value: any): string {
   try {
+    // ${value} is used with the value argument
     return eval('`' + template + '`;');
   } catch (err) {
     return template;
@@ -66,5 +71,5 @@ function renderTemplate(template, value) {
 }
 
 export {
-  run,
+  itEach,
 };

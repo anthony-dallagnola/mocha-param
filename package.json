@@ -6,7 +6,8 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "mocha -r ts-node/register ./test/*.ts",
+    "test": "mocha -r ts-node/register ./test/index.ts",
+    "test:only": "mocha -r ts-node/register ./test/indexOnly.ts",
     "lint": "eslint lib/**/*.ts*"
   },
   "keywords": [
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@types/chai": "^4.2.15",
     "@types/mocha": "^8.2.1",
+    "@types/node": "^14.14.31",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "chai": "^3.5.0",
