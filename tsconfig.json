@@ -15,6 +15,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "build",
+    // exports type with js
+    "declaration": true
   },
   "include": [
     "lib/**/*"
