@@ -1,6 +1,6 @@
 import { FunctionCallback } from './model/FunctionCallbackType';
 import { MochaCallback } from './model/MochaCallbackType';
-import { ParamTestFunction } from './model/ParamTestFunction';
+import { ParamTestFunction } from './model/ParamTestFunctionType';
 
 const itEach: ParamTestFunction = <T>(title: string, data: T[], callback: FunctionCallback<T>, callbackMocha?: MochaCallback): void => {
   if (callback.length === 2) {

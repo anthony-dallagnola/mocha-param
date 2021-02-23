@@ -8,15 +8,14 @@
     ],
     "module": "commonjs",
     "target": "ESNext",
-    // "strict": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    // "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "build",
     // exports type with js
-    "declaration": true
+    "declaration": true,
+    "declarationMap": true,
   },
   "include": [
     "lib/**/*"

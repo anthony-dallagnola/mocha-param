@@ -3,10 +3,13 @@
   "version": "1.0.1",
   "description": "Parameterized tests for Mocha",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": ["build/**/*"],
   "scripts": {
     "build": "tsc",
     "test": "mocha -r ts-node/register ./test/index.ts",
     "lint": "eslint lib/*.ts*",
+    "prepublish": "npm run build",
     "publish:dry-run": "npm publish --dry-run"
   },
   "keywords": [
