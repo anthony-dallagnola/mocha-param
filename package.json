@@ -1,14 +1,13 @@
 {
-  "name": "mocha-param",
-  "version": "2.0.1",
+  "name": "mocha-it-each",
+  "version": "1.0.0",
   "description": "Parameterized tests for Mocha",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "build/index.js",
   "scripts": {
     "build": "tsc",
     "test": "mocha -r ts-node/register ./test/index.ts",
-    "test:only": "mocha -r ts-node/register ./test/indexOnly.ts",
-    "lint": "eslint lib/**/*.ts*"
+    "lint": "eslint lib/*.ts*",
+    "publish:dry-run": "npm publish --dry-run"
   },
   "keywords": [
     "parameterized",
@@ -16,11 +15,11 @@
     "mocha",
     "tests"
   ],
-  "author": "mikejsdev",
+  "author": "anthonydallagnola",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mikejsdev/mocha-param.git"
+    "url": "git://github.com/anthony-dallagnola/mocha-param.git"
   },
   "devDependencies": {
     "@types/chai": "^4.2.15",
